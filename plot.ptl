@@ -1,0 +1,7 @@
+set terminal postscript eps enhanced color solid
+set output "Result.ps"
+set datafile separator ' '
+set ylabel "T"
+set xlabel "x"
+set grid xtics ytics
+plot "Result.txt" using 1:2 with lines title "T(x)"
