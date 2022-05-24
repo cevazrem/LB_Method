@@ -101,61 +101,6 @@ class lb_method {
 	}
 };
 
-
-/*
-int main() {
-    int i;
-    int m = 100;
-    std::ofstream result("Result.txt");
-    if (!result.is_open()) {
-        std::cout << "Cant open the result file";
-        return 1;
-    }
-    std::vector <all_data> data(m); 
-    double dt = 1;
-    double dx = 1;
-    data[0].x = 0;
-    for (int i = 1; i < m; ++i) {
-        data[i].x = data[i-1].x + dx;
-    }
-    double csq = (dx * dx)/(dt * dt);
-    double alpha = 0.25;
-    double omega = 1 / (alpha / (dt * csq) + 0.5);
-    int time_stap = 200;
-    double left_temp = 1;
-    double start_temp = 0;
-    
-    for (int i = 0; i < m ; ++i) {
-        data[i].rho = 0;
-        data[i].f1 = 0.5 * data[i].rho;
-        data[i].f2 = 0.5 * data[i].rho;
-    }    
-
-    for (int tt = 1; tt < time_stap; ++tt) {
-        for (int i = 0; i < m; ++i) {
-            data[i].rho = data[i].f1 + data[i].f2;
-            data[i].feq = 0.5 * data[i].rho;
-            data[i].f1 = (1 - omega) * data[i].f1 + omega * data[i].feq;
-            data[i].f2 = (1 - omega) * data[i].f2 + omega * data[i].feq;
-        }
-        
-        for (int i = 1; i < m - 1; ++i) {
-            data[m - i - 1].f1 = data[m - i - 2].f1;
-            data[i - 1].f2 = data[i].f2;
-        }
-
-        data[0].f1 = left_temp - data[0].f2;
-        data[m - 1].f1 = data[m - 2].f1;
-        data[m - 1].f2 = data[m - 2].f2;
-    }
-    
-    for (int i = 0 ; i < m; ++i) {
-        result << data[i].x << ' ' << data[i].rho << std::endl;
-    }
-    return 0;
-}
-*/
-
 int main(int argc, char **argv) {
 	int mode;
 	std::cout << "Enter mode. 1-model, 2-config" << std::endl;
