@@ -15,14 +15,14 @@ class lb_method {
         std::vector <all_data> data;
         double dt, dx, csq, alpha, omega, left_temp, start_temp; 
         int m, time_step; 
-		std::ofstream result;
+	std::ofstream result;
     public:
     
     lb_method() {
-		m = 100;
-		time_step = 200;
-		data.resize(m);
-		result.open("Result.txt");
+	m = 100;
+	time_step = 200;
+	data.resize(m);
+	result.open("Result.txt");
         dt = 1;
         dx = 1;
         data[0].x = start_temp;
@@ -42,10 +42,10 @@ class lb_method {
     }
     
     lb_method(double length, double cur_time, double _alpha, double _left_temp, double _start_temp, int _m, int _time_step) {
-		m = _m;
-		time_step = _time_step;
-		data.resize(m);
-		result.open("Result.txt");
+	m = _m;
+	time_step = _time_step;
+	data.resize(m);
+	result.open("Result.txt");
         dt = cur_time/time_step;
         dx = length/m;
         data[0].x = start_temp;
@@ -58,10 +58,10 @@ class lb_method {
         left_temp = _left_temp;
         start_temp = _start_temp;
         for (int i = 0; i < m ; ++i) {
-			data[i].rho = 0;
-			data[i].f1 = 0.5 * data[i].rho;
-			data[i].f2 = 0.5 * data[i].rho;
-		}
+	    data[i].rho = 0;
+	    data[i].f1 = 0.5 * data[i].rho;
+	    data[i].f2 = 0.5 * data[i].rho;
+	}
     }
     
     void collision() {
@@ -74,31 +74,31 @@ class lb_method {
     }
     
     void streaming() {
-		for (int i = 1; i < m - 1; ++i) {
+	for (int i = 1; i < m - 1; ++i) {
             data[m - i - 1].f1 = data[m - i - 2].f1;
             data[i - 1].f2 = data[i].f2;
         }
-	}
+    }
 	
-	void bound_cond() {
-		data[0].f1 = left_temp - data[0].f2;
+    void bound_cond() {
+	data[0].f1 = left_temp - data[0].f2;
         data[m - 1].f1 = data[m - 2].f1;
         data[m - 1].f2 = data[m - 2].f2;
-	}
+    }
 	
-	void write_file() {
-		for (int i = 0 ; i < m; ++i) {
-			result << data[i].x << ' ' << data[i].rho << std::endl;
-		}
+    void write_file() {
+	for (int i = 0 ; i < m; ++i) {
+	    result << data[i].x << ' ' << data[i].rho << std::endl;
 	}
+    }
 	
-	void calculate() {
-		for (int i = 0; i < time_step; ++i) {
-			collision();
-			streaming();
-			bound_cond();
-		}
-	}
+    void calculate() {
+	for (int i = 0; i < time_step; ++i) {
+	    collision();
+	    streaming();
+	    bound_cond();
+        }
+    }
 };
 
 int main(int argc, char **argv) {
